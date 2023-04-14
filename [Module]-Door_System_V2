@@ -7,6 +7,7 @@ if (first() | dupefinished()) {
 
 #       Chat Commands
 #           Disclaimer: Prefix May Vary, See `Line 16`. 
+#           Disclaimer: Make Sure Concmd is enabled in E2 settings
 #           !add NAME/STEAMID       # - adds a name to the list
 #           !remove NAME/STEAMID    # - removes a name from the list
 #           !list                   # - prints the current list of names
@@ -92,7 +93,8 @@ if (first() | dupefinished()) {
                     break
                     
                     case "REMOVE",
-                    case "R",
+                    case "REM",
+                    case "D",
                         if(This == owner()){
                             local PLYID = findPlayerBySteamID(ARGS[1, string])
                             local PLYNAME = findPlayerByName(ARGS[1, string])
@@ -214,9 +216,9 @@ if (clk("checkUser")) {
         if(PD2:isValid() & List:exists(PD2:steamID()) & PD2:pos():distance(D2:pos()) < DoorRadius){F2=1, timer("F2", 4000)}
         if(PD3:isValid() & List:exists(PD3:steamID()) & PD3:pos():distance(D3:pos()) < DoorRadius){F3=1, timer("F3", 4000)}
         Stranger =
-        (!List:exists(PD1:steamID()) & PD1:pos():distance(D1:pos()) < DoorRadius & PD1:isValid() & PD1:isPlayer() & !PD1:isValidPhysics() & PD1:isAlive() & !D1:isValid())  || 
-        (!List:exists(PD2:steamID()) & PD2:pos():distance(D2:pos()) < DoorRadius & PD2:isValid() & PD2:isPlayer() & !PD2:isValidPhysics() & PD2:isAlive() & !D2:isValid()) || 
-        (!List:exists(PD3:steamID()) & PD3:pos():distance(D3:pos()) < DoorRadius & PD3:isValid() & PD3:isPlayer() & !PD3:isValidPhysics() & PD3:isAlive() & !D3:isValid()) 
+        (!List:exists(PD1:steamID()) & PD1:pos():distance(D1:pos()) < DoorRadius & PD1:isValid() & PD1:isPlayer() & !PD1:isValidPhysics() & PD1:isAlive() & D1:isValid()) || 
+        (!List:exists(PD2:steamID()) & PD2:pos():distance(D2:pos()) < DoorRadius & PD2:isValid() & PD2:isPlayer() & !PD2:isValidPhysics() & PD2:isAlive() & D2:isValid()) || 
+        (!List:exists(PD3:steamID()) & PD3:pos():distance(D3:pos()) < DoorRadius & PD3:isValid() & PD3:isPlayer() & !PD3:isValidPhysics() & PD3:isAlive() & D3:isValid()) 
         
   }
 }
@@ -227,4 +229,3 @@ if(clk("F3")) {F3 = 0}
 
 if(Stranger == 1){EGP:egpText(1,"ALARM", Alarm)}
 else {EGP:egpText(1,"", Alarm)}
-
